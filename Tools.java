@@ -29,4 +29,8 @@ public class Tools {
 		}
 
 	}
+
+	public static double Gaussian(double r, double sigma) {
+		return Math.exp(-(r * r) / (2 * sigma * sigma));
+	}
 }

@@ -54,4 +54,8 @@ public class Dataline {
 			a.print();
 		}
 	}
+
+	public double[] getInputs() {
+		return stats;
+	}
 }
