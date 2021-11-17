@@ -46,12 +46,12 @@ public class Network {
 			centers[i] = new Center(INPUTS, SIGMA, CENTER_RATE, CO_RATE, SIGMA_RATE);
 			centers[i].setPosition(init.get(i).getValues());
 		}
-		printArgs();
+		// printArgs();
 	}
 
 	public static void main(String[] args) {
 		setParameters(Tools.getParameters("parameters.txt"));
-
+		ArrayList<String> errors = new ArrayList<>();
 		for (int epoch = 0; epoch < ITERATIONS; epoch++) {
 			double train_error = 0;
 			for (Dataline data : train) {
@@ -72,7 +72,10 @@ public class Network {
 
 			}
 			System.out.println("Error: " + 0.5 * train_error / train.size());
+			errors.add(epoch + " " + 0.5 * train_error / train.size() + " " + 0);
 
 		}
+		Tools.feedFile("results.txt", errors);
+		Tools.runPython("CreateErrorPlot.py", "results.txt");
 	}
 }

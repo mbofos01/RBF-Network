@@ -1,3 +1,4 @@
+import java.util.Arrays;
 
 public class Center {
 	private int size;
@@ -6,6 +7,8 @@ public class Center {
 	private double[] inputs;
 	private double[] position;
 	private double coefficient;
+	private int ID;
+	private static int id = 0;
 
 	public Center(int size, double sigma, double Crate, double Srate, double COrate) {
 		this.size = size;
@@ -16,6 +19,8 @@ public class Center {
 		inputs = new double[size];
 		position = new double[size];
 		coefficient = Tools.randomWeight();
+		ID = id + 1;
+		id++;
 	}
 
 	/**
@@ -141,6 +146,15 @@ public class Center {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
+	}
+
+	public void print() {
+		System.out.println(toString());
+	}
+
+	@Override
+	public String toString() {
+		return "Center " + ID + "  [position=" + Arrays.toString(position) + "]";
 	}
 
 	public void updateCoefficients(double error) {
