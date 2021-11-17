@@ -2,16 +2,62 @@
 public class Center {
 	private int size;
 	private double sigma;
+	private double center_rate, sigma_rate, co_rate;
 	private double[] inputs;
 	private double[] position;
 	private double coefficient;
 
-	public Center(int size, double sigma) {
+	public Center(int size, double sigma, double Crate, double Srate, double COrate) {
 		this.size = size;
 		this.sigma = sigma;
+		this.center_rate = Crate;
+		this.sigma_rate = Srate;
+		this.co_rate = COrate;
 		inputs = new double[size];
 		position = new double[size];
-		coefficient = Math.random();
+		coefficient = Tools.randomWeight();
+	}
+
+	/**
+	 * @return the center_rate
+	 */
+	public double getCenter_rate() {
+		return center_rate;
+	}
+
+	/**
+	 * @param center_rate the center_rate to set
+	 */
+	public void setCenter_rate(double center_rate) {
+		this.center_rate = center_rate;
+	}
+
+	/**
+	 * @return the sigma_rate
+	 */
+	public double getSigma_rate() {
+		return sigma_rate;
+	}
+
+	/**
+	 * @param sigma_rate the sigma_rate to set
+	 */
+	public void setSigma_rate(double sigma_rate) {
+		this.sigma_rate = sigma_rate;
+	}
+
+	/**
+	 * @return the co_rate
+	 */
+	public double getCo_rate() {
+		return co_rate;
+	}
+
+	/**
+	 * @param co_rate the co_rate to set
+	 */
+	public void setCo_rate(double co_rate) {
+		this.co_rate = co_rate;
 	}
 
 	public void resetInputs(double[] new_inputs) {
@@ -94,6 +140,24 @@ public class Center {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+
+	}
+
+	public void updateCoefficients(double error) {
+		this.coefficient = this.coefficient + co_rate * error * Tools.Gaussian(Euclidean(), sigma);
+	}
+
+	public void updateSigma(double error) {
+		this.sigma = this.sigma + sigma_rate * error * coefficient * Tools.Gaussian(Euclidean(), sigma) * Euclidean()
+				* Euclidean() / Math.pow(sigma, 3);
+
+	}
+
+	public void updateCenter(double error) {
+		for (int i = 0; i < size; i++) {
+			position[i] = position[i] + center_rate * error
+					+ coefficient * Tools.Gaussian(Euclidean(), sigma) * Euclidean() / Math.pow(sigma, 2);
+		}
 
 	}
 

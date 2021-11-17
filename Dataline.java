@@ -2,9 +2,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Dataline {
-	private double stats[] = new double[53];
+	private double stats[];
 	private String name;
 	private double action;
+
+	public Dataline(int size) {
+		stats = new double[size];
+	}
 
 	public void addStat(int place, double value) {
 		stats[place] = value;
@@ -49,7 +53,7 @@ public class Dataline {
 
 	public static void main(String[] args) {
 		ArrayList<Dataline> list = new ArrayList<>();
-		Tools.fillData("train.txt", list);
+		Tools.fillData("train.txt", 53, list);
 		for (Dataline a : list) {
 			a.print();
 		}
