@@ -20,21 +20,15 @@ public class Sum {
 		inputs.add((double) value);
 	}
 
+	public void flushInputs() {
+		inputs.clear();
+	}
+
 	public double activate() {
 		double sum = 0;
 		for (Double s : inputs)
 			sum += s;
 		return bias + sum;
-	}
-
-	public static void main(String[] args) {
-		Sum sum = new Sum(0.5);
-		sum.insertInput(2.0);
-		sum.insertInput(2);
-		sum.insertInput(2.5);
-
-		System.out.println(sum.activate());
-
 	}
 
 	public void updateBias(double rate, double error) {

@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 public class Network {
 	static Center[] centers;
-	static Sum sum = new Sum();
+	static Sum sum = new Sum(0.9);
 	static ArrayList<Dataline> train = new ArrayList<>();
 	static ArrayList<Dataline> test = new ArrayList<>();
 	static ArrayList<Centerline> init = new ArrayList<>();
@@ -46,35 +46,57 @@ public class Network {
 			centers[i] = new Center(INPUTS, SIGMA, CENTER_RATE, CO_RATE, SIGMA_RATE);
 			centers[i].setPosition(init.get(i).getValues());
 		}
-		// printArgs();
+		// Collections.shuffle(train);
+		// Collections.shuffle(test);
+		// Collections.shuffle(init);
+		printArgs();
 	}
 
 	public static void main(String[] args) {
 		setParameters(Tools.getParameters("parameters.txt"));
 		ArrayList<String> errors = new ArrayList<>();
 		for (int epoch = 0; epoch < ITERATIONS; epoch++) {
+			System.out.println("NEW ITERATION");
+			System.out.println("TRAINING");
 			double train_error = 0;
 			for (Dataline data : train) {
+				sum.flushInputs();
 				for (Center cen : centers) {
 					cen.resetInputs(data.getInputs());
 					sum.insertInput(cen.output());
 				}
 				double real = sum.activate();
 				double error = data.getAction() - real;
-				// System.out.println("Exp: " + data.getAction() + " Real: " + real);
 				sum.updateBias(CO_RATE, error);
 				for (Center cen : centers) {
 					cen.updateCenter(error);
 					cen.updateCoefficients(error);
 					cen.updateSigma(error);
 				}
+				System.out.println("Exp: " + data.getAction() + " Real: " + sum.activate());
 				train_error += error * error;
 
 			}
-			System.out.println("Error: " + 0.5 * train_error / train.size());
-			errors.add(epoch + " " + 0.5 * train_error / train.size() + " " + 0);
+			System.out.println("TESTING");
+			double test_error = 0;
+			for (Dataline data : test) {
+				sum.flushInputs();
+				for (Center cen : centers) {
+					cen.resetInputs(data.getInputs());
+					sum.insertInput(cen.output());
+				}
+				System.out.println("Exp: " + data.getAction() + " Real: " + sum.activate());
+				double real = sum.activate();
+				double error = data.getAction() - real;
+				test_error += error * error;
+				sum.flushInputs();
+
+			}
+			// System.out.println("Error: " + 0.5 * train_error / train.size());
+			errors.add(epoch + " " + 0.5 * train_error / train.size() + " " + (0.5 * test_error) / test.size());
 
 		}
+
 		Tools.feedFile("results.txt", errors);
 		Tools.runPython("CreateErrorPlot.py", "results.txt");
 	}
