@@ -35,7 +35,7 @@ public class Tools {
 	}
 
 	public static double Gaussian(double r, double sigma) {
-		return Math.exp(-(r * r) / (2 * sigma * sigma));
+		return Math.exp(-(r) / (2 *Math.pow(sigma,2) )  );
 	}
 
 	/**

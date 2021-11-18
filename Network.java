@@ -67,16 +67,16 @@ public class Network {
 				}
 				double real = sum.activate();
 				double error = data.getAction() - real;
-				sum.updateBias(CO_RATE, error);
 				for (Center cen : centers) {
 					cen.updateCenter(error);
 					cen.updateCoefficients(error);
 					cen.updateSigma(error);
 				}
 				System.out.println("Exp: " + data.getAction() + " Real: " + sum.activate());
-				train_error += error * error;
+				train_error += 0.5 * error * error;
 
 			}
+			// System.exit(1);
 			System.out.println("TESTING");
 			double test_error = 0;
 			for (Dataline data : test) {
@@ -85,15 +85,16 @@ public class Network {
 					cen.resetInputs(data.getInputs());
 					sum.insertInput(cen.output());
 				}
-				System.out.println("Exp: " + data.getAction() + " Real: " + sum.activate());
 				double real = sum.activate();
+				System.out.println("Exp: " + data.getAction() + " Real: " + real);
+
 				double error = data.getAction() - real;
 				test_error += error * error;
 				sum.flushInputs();
 
 			}
 			// System.out.println("Error: " + 0.5 * train_error / train.size());
-			errors.add(epoch + " " + 0.5 * train_error / train.size() + " " + (0.5 * test_error) / test.size());
+			errors.add(epoch + " " + 0.5 * train_error / train.size() + " " + 0.5 * test_error / test.size());
 
 		}
 

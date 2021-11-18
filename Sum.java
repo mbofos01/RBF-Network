@@ -26,8 +26,10 @@ public class Sum {
 
 	public double activate() {
 		double sum = 0;
-		for (Double s : inputs)
+		for (Double s : inputs) {
+			// System.out.println(sum);
 			sum += s;
+		}
 		return bias + sum;
 	}
 

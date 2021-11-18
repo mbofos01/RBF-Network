@@ -132,11 +132,11 @@ public class Center {
 	}
 
 	public double Euclidean() {
-		double sum = 0;
+		double sum = 0.0;
 		for (int i = 0; i < size; i++) {
 			sum += Math.pow((inputs[i] - position[i]), 2);
 		}
-		return Math.sqrt(sum);
+		return sum;
 	}
 
 	public double output() {
@@ -162,15 +162,14 @@ public class Center {
 	}
 
 	public void updateSigma(double error) {
-		this.sigma = this.sigma + sigma_rate * error * coefficient * Tools.Gaussian(Euclidean(), sigma) * Euclidean()
-				* Euclidean() / Math.pow(sigma, 3);
+		this.sigma = this.sigma + sigma_rate * error * coefficient * Tools.Gaussian(Euclidean(), sigma) * (Euclidean() / Math.pow(sigma, 3));
 
 	}
 
 	public void updateCenter(double error) {
 		for (int i = 0; i < size; i++) {
 			position[i] = position[i] + center_rate * error
-					+ coefficient * Tools.Gaussian(Euclidean(), sigma) * Euclidean() / Math.pow(sigma, 2);
+					* coefficient * Tools.Gaussian(Euclidean(), sigma) * ((inputs[i] - position[i]) / Math.pow(sigma, 2));
 		}
 
 	}
