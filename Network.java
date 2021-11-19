@@ -46,9 +46,6 @@ public class Network {
 			centers[i] = new Center(INPUTS, SIGMA, CENTER_RATE, CO_RATE, SIGMA_RATE);
 			centers[i].setPosition(init.get(i).getValues());
 		}
-		// Collections.shuffle(train);
-		// Collections.shuffle(test);
-		// Collections.shuffle(init);
 		printArgs();
 	}
 
