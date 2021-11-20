@@ -132,22 +132,6 @@ public class RBF {
 			}
 			errors.add(epoch + " " + totalError / train.size() + " " + totalErrorTest / test.size());
 		}
-		System.out.println("+---------------------------------------+");
-		for (Dataline line : train) {
-			calculateOutputs(line);
-			double target = line.getGoal();
-			double real = outputs[0];
-			System.out.println("\t" + target + " " + real);
-		}
-		System.out.println("+---------------------------------------+");
-		for (Dataline line : test) {
-			calculateOutputs(line);
-			double target = line.getGoal();
-			double real = outputs[0];
-			System.out.println("\t" + target + " " + real);
-
-		}
-		System.out.println("+---------------------------------------+");
 		Tools.feedFile("results.txt", errors);
 		Tools.runPython("CreateErrorPlot.py", "results.txt");
 		printWeights();
