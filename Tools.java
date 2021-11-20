@@ -158,7 +158,6 @@ public class Tools {
 				// System.out.println(tok.nextToken());
 				for (int i = 0; i < 53; i++)
 					cen.addValue(i, tok.nextToken());
-
 				init.add(cen);
 				cen = null;
 			}

@@ -4,7 +4,7 @@ public class RBF {
 	static Center[] centers;
 
 	static int CENTERS, ITERATIONS, INPUTS, OUTPUTS;
-	static double SIGMA, CENTER_RATE, SIGMA_RATE, WEIGHT_RATE;
+	static double SIGMA, CENTER_RATE, SIGMA_RATE, WEIGHT_RATE, bias;
 	static String CEN_FILE, TR_FILE, TS_FILE;
 	static ArrayList<Dataline> train = new ArrayList<>();
 	static ArrayList<Dataline> test = new ArrayList<>();
@@ -45,6 +45,7 @@ public class RBF {
 		Tools.fillData(TS_FILE, INPUTS, test);
 		Tools.fillCenters(CEN_FILE, init);
 
+		bias = 0;
 		centers = new Center[CENTERS];
 		for (int i = 0; i < CENTERS; i++)
 			centers[i] = new Center(SIGMA, OUTPUTS, INPUTS, init.get(i).toArray());
@@ -88,6 +89,9 @@ public class RBF {
 			center.setSigma(temp);
 		}
 	}
+	public static void updateBias(double error){
+		bias += WEIGHT_RATE * error * 0;
+	}
 
 	public static void calculateOutputs(Dataline line) {
 
@@ -99,7 +103,7 @@ public class RBF {
 				sum += center.getWeight(output_node)
 						* Tools.gaussian(line.getInputs(), center.getPosition(), center.getSigma());
 
-			outputs[output_node] = sum;
+			outputs[output_node] = sum + bias;
 		}
 	}
 	public static void adjustVariables(Dataline line,double error){
@@ -108,6 +112,7 @@ public class RBF {
 		updateCenters(line, error);
 		updateSigmas(line, error);
 		updateWeights(line, error);
+		updateBias(error);
 	}
 
 	public static void main(String[] args) {
