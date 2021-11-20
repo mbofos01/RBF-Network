@@ -18,4 +18,7 @@ public class Centerline {
 		return values;
 	}
 
+	public double[] toArray() {
+		return values;
+	}
 }

@@ -1,10 +1,9 @@
-import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Dataline {
 	private double stats[];
 	private String name;
-	private double action;
+	private double goal;
 
 	public Dataline(int size) {
 		stats = new double[size];
@@ -30,33 +29,25 @@ public class Dataline {
 		return name;
 	}
 
-	public void setAction(double value) {
-		action = value;
+	public void setGoal(double value) {
+		goal = value;
 	}
 
-	public void setAction(String value) {
-		setAction(Double.parseDouble(value));
+	public void setGoal(String value) {
+		setGoal(Double.parseDouble(value));
 	}
 
-	public double getAction() {
-		return action;
+	public double getGoal() {
+		return goal;
 	}
 
 	@Override
 	public String toString() {
-		return "Dataline name= " + name + " , action= " + action + " stats= " + Arrays.toString(stats);
+		return "Dataline name= " + name + " , goal = " + goal + " stats= " + Arrays.toString(stats);
 	}
 
 	public void print() {
 		System.out.println(toString());
-	}
-
-	public static void main(String[] args) {
-		ArrayList<Dataline> list = new ArrayList<>();
-		Tools.fillData("train.txt", 53, list);
-		for (Dataline a : list) {
-			a.print();
-		}
 	}
 
 	public double[] getInputs() {
