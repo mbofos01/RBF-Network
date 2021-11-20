@@ -1,9 +1,9 @@
 numHiddenLayerNeurons 4
 numInputNeurons 53
 numOutputNeurons 1
-learningRates   0.01 0.08 0.8
-sigmas 0.78
-maxIterations 500
+learningRates   0.5 0.9 .4
+sigmas 15
+maxIterations 300
 centresFile small.txt
 trainFile train.txt
 testFile test.txt

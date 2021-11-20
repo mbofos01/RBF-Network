@@ -102,9 +102,21 @@ public class RBF {
 			outputs[output_node] = sum;
 		}
 	}
+	public static void adjustVariables(Dataline line,double error){
+		for (Center c : centers)
+			c.enableTempVariables();
+		updateCenters(line, error);
+		updateSigmas(line, error);
+		updateWeights(line, error);
+	}
 
 	public static void main(String[] args) {
-		setParameters(Tools.getParameters("parameters.txt"));
+		String parametersFile;
+		if( args.length == 0 )
+			parametersFile = "parameters.txt";
+		else
+			parametersFile = args[0];
+		setParameters(Tools.getParameters(parametersFile));
 		outputs = new double[OUTPUTS];
 		for (int epoch = 0; epoch < ITERATIONS; epoch++) {
 			double totalError = 0.0;
@@ -114,11 +126,7 @@ public class RBF {
 				double real = outputs[0];
 				double error = (target - real);
 				totalError += 0.5 * (target - real) * (target - real);
-				for (Center c : centers)
-					c.enableTempVariables();
-				updateCenters(line, error);
-				updateSigmas(line, error);
-				updateWeights(line, error);
+				adjustVariables(line,error);
 
 			}
 			double totalErrorTest = 0.0;
@@ -126,8 +134,9 @@ public class RBF {
 				calculateOutputs(line);
 				double target = line.getGoal();
 				double real = outputs[0];
-				// double error = (target - real);
+				//double error = (target - real);
 				totalErrorTest += 0.5 * (target - real) * (target - real);
+				//adjustVariables(line,error);
 
 			}
 			errors.add(epoch + " " + totalError / train.size() + " " + totalErrorTest / test.size());

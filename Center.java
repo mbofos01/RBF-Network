@@ -1,3 +1,5 @@
+import java.io.*;
+import java.util.*;
 
 public class Center {
 	public double[] weights, temp_weights;
@@ -72,11 +74,7 @@ public class Center {
 	}
 
 	public String info() {
-		int i = 0;
-		String s = " ";
-		for (i = 0; i < weights.length; i++)
-			s.concat(weights[i] + " ");
-		return s;
+		return Arrays.toString(weights);
 	}
 
 }
