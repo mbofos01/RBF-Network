@@ -4,7 +4,6 @@ numOutputNeurons 1
 learningRates   0.05 0.01 0.04
 sigmas 1.5
 maxIterations 400
-centresFile small.txt
+centresFile centerVectors.txt
 trainFile train.txt
 testFile test.txt
-

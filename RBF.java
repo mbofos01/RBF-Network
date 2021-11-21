@@ -22,7 +22,7 @@ public class RBF {
 		System.out.println("| Center Rate:\t\t" + CENTER_RATE + "\t\t|");
 		System.out.println("| Sigma Rate:\t\t" + SIGMA_RATE + "\t\t|");
 		System.out.println("| Coefficient Rate:\t" + WEIGHT_RATE + "\t\t|");
-		System.out.println("| Center File:\t\t" + CEN_FILE + "\t|");
+		System.out.println("| Center File:\t      " + CEN_FILE + "\t|");
 		System.out.println("| Train File:\t\t" + TR_FILE + "\t|");
 		System.out.println("| Test File:\t\t" + TS_FILE + "\t|");
 		System.out.println("+---------------------------------------+");
