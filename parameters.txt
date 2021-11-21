@@ -2,7 +2,7 @@ numHiddenLayerNeurons 4
 numInputNeurons 53
 numOutputNeurons 1
 learningRates   0.05 0.01 0.04
-sigmas 1.5
+sigmas 0.78
 maxIterations 400
 centresFile centerVectors.txt
 trainFile train.txt
