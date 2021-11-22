@@ -1,8 +1,15 @@
 import java.util.ArrayList;
 
+/**
+ * 
+ * @author Michail - Panagiotis Bofos
+ *
+ */
 public class RBF {
+	/**
+	 * 
+	 */
 	static Center[] centers;
-
 	static int CENTERS, ITERATIONS, INPUTS, OUTPUTS;
 	static double SIGMA, CENTER_RATE, SIGMA_RATE, WEIGHT_RATE, bias;
 	static String CEN_FILE, TR_FILE, TS_FILE;
@@ -12,6 +19,9 @@ public class RBF {
 	static ArrayList<String> errors = new ArrayList<>();
 	static double[] outputs;
 
+	/**
+	 * 
+	 */
 	private static void printArgs() {
 		System.out.println("+---------------------------------------+");
 		System.out.println("| Centers:\t\t" + CENTERS + "\t\t|");
@@ -28,6 +38,10 @@ public class RBF {
 		System.out.println("+---------------------------------------+");
 	}
 
+	/**
+	 * 
+	 * @param list
+	 */
 	private static void setParameters(ArrayList<String> list) {
 		CENTERS = Integer.parseInt(list.get(0));
 		INPUTS = Integer.parseInt(list.get(1));
@@ -52,6 +66,11 @@ public class RBF {
 		printArgs();
 	}
 
+	/**
+	 * 
+	 * @param line
+	 * @param error
+	 */
 	public static void updateWeights(Dataline line, double error) {
 		for (Center center : centers)
 			for (int i = 0; i < OUTPUTS; i++)
@@ -60,6 +79,11 @@ public class RBF {
 
 	}
 
+	/**
+	 * 
+	 * @param line
+	 * @param error
+	 */
 	public static void updateCenters(Dataline line, double error) {
 		for (Center center : centers)
 			for (int i = 0; i < center.position.length; i++) {
@@ -75,6 +99,11 @@ public class RBF {
 			}
 	}
 
+	/**
+	 * 
+	 * @param line
+	 * @param error
+	 */
 	public static void updateSigmas(Dataline line, double error) {
 		for (Center center : centers) {
 			double temp = 0.0;
@@ -89,10 +118,19 @@ public class RBF {
 			center.setSigma(temp);
 		}
 	}
-	public static void updateBias(double error){
+
+	/**
+	 * 
+	 * @param error
+	 */
+	public static void updateBias(double error) {
 		bias += WEIGHT_RATE * error * 0;
 	}
 
+	/**
+	 * 
+	 * @param line
+	 */
 	public static void calculateOutputs(Dataline line) {
 
 		for (int output_node = 0; output_node < OUTPUTS; output_node++) {
@@ -106,7 +144,13 @@ public class RBF {
 			outputs[output_node] = sum + bias;
 		}
 	}
-	public static void adjustVariables(Dataline line,double error){
+
+	/**
+	 * 
+	 * @param line
+	 * @param error
+	 */
+	public static void adjustVariables(Dataline line, double error) {
 		for (Center c : centers)
 			c.enableTempVariables();
 		updateCenters(line, error);
@@ -115,9 +159,24 @@ public class RBF {
 		updateBias(error);
 	}
 
+	/**
+	 * 
+	 */
+	private static void printWeights() {
+		ArrayList<String> weights = new ArrayList<>();
+		for (Center center : centers)
+			weights.add(center.info());
+
+		Tools.feedFile("weights.txt", weights);
+	}
+
+	/**
+	 * 
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		String parametersFile;
-		if( args.length == 0 )
+		if (args.length == 0)
 			parametersFile = "parameters.txt";
 		else
 			parametersFile = args[0];
@@ -131,7 +190,7 @@ public class RBF {
 				double real = outputs[0];
 				double error = (target - real);
 				totalError += 0.5 * (target - real) * (target - real);
-				adjustVariables(line,error);
+				adjustVariables(line, error);
 
 			}
 			double totalErrorTest = 0.0;
@@ -139,9 +198,9 @@ public class RBF {
 				calculateOutputs(line);
 				double target = line.getGoal();
 				double real = outputs[0];
-				//double error = (target - real);
+				// double error = (target - real);
 				totalErrorTest += 0.5 * (target - real) * (target - real);
-				//adjustVariables(line,error);
+				// adjustVariables(line,error);
 
 			}
 			errors.add(epoch + " " + totalError / train.size() + " " + totalErrorTest / test.size());
@@ -151,11 +210,4 @@ public class RBF {
 		printWeights();
 	}
 
-	private static void printWeights() {
-		ArrayList<String> weights = new ArrayList<>();
-		for (Center center : centers)
-			weights.add(center.info());
-
-		Tools.feedFile("weights.txt", weights);
-	}
 }

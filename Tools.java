@@ -6,6 +6,11 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.StringTokenizer;
 
+/**
+ * 
+ * @author Michail - Panagiotis Bofos
+ *
+ */
 public class Tools {
 
 	/**
@@ -61,6 +66,12 @@ public class Tools {
 		}
 	}
 
+	/**
+	 * 
+	 * @param x
+	 * @param R
+	 * @return
+	 */
 	public static double euclidean(double x[], double R[]) {
 		if (x.length != R.length)
 			System.exit(0);
@@ -72,6 +83,13 @@ public class Tools {
 		return temp;
 	}
 
+	/**
+	 * 
+	 * @param x
+	 * @param R
+	 * @param sigma
+	 * @return
+	 */
 	public static double gaussian(double x[], double R[], double sigma) {
 		double temp = 0.0;
 		temp = -1 * euclidean(x, R);
@@ -108,6 +126,12 @@ public class Tools {
 		return list;
 	}
 
+	/**
+	 * 
+	 * @param filename
+	 * @param num_of_inputs
+	 * @param data
+	 */
 	public static void fillData(String filename, int num_of_inputs, ArrayList<Dataline> data) {
 		try {
 			File myObj = new File(filename);
@@ -133,18 +157,11 @@ public class Tools {
 
 	}
 
-	public static double Gaussian(double r, double sigma) {
-		return Math.exp(-1 * (r) / (2 * Math.pow(sigma, 2)));
-	}
-
-	public static void main(String[] args) {
-		double[] x = { 1, 2, 3 };
-		double[] y = { 4, 5, 6 };
-		System.out.println(euclidean(x, y));
-		System.out.println(Gaussian(euclidean(x, y), 2));
-		System.out.println(gaussian(x, y, 2));
-	}
-
+	/**
+	 * 
+	 * @param filename
+	 * @param init
+	 */
 	public static void fillCenters(String filename, ArrayList<Centerline> init) {
 		try {
 			File myObj = new File(filename);
