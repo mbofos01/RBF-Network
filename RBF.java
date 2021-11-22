@@ -1,27 +1,52 @@
 import java.util.ArrayList;
 
 /**
+ * This is the main class of our project. After we 
+ * compile our code this is the program we must run.
+ * In this file we create and run our RBF network.
  * 
  * @author Michail - Panagiotis Bofos
  *
  */
 public class RBF {
 	/**
-	 * 
+	 * Each RBF network has a Centers vector.
 	 */
 	static Center[] centers;
+	/** 
+	 * For the algorithm of adjustable centers we need a count for the centers,
+	 * the algo's max epochs, the number of inputs and outputs.
+	 */
 	static int CENTERS, ITERATIONS, INPUTS, OUTPUTS;
 	static double SIGMA, CENTER_RATE, SIGMA_RATE, WEIGHT_RATE, bias;
+	/**
+	 * The names of the training, testing and initial centers file.
+	 */
 	static String CEN_FILE, TR_FILE, TS_FILE;
+	/**
+	 * Arraylists for training and testing data.
+	 */
 	static ArrayList<Dataline> train = new ArrayList<>();
 	static ArrayList<Dataline> test = new ArrayList<>();
+	/**
+	 * Arraylist for the inital position of our centers.
+	 */
 	static ArrayList<Centerline> init = new ArrayList<>();
+	/**
+	 * Arraylist for the error of each epoch.
+	 */
 	static ArrayList<String> errors = new ArrayList<>();
+	/**
+	 * A vector for the created outputs.
+	 */
 	static double[] outputs;
+	/**
+	 * A flag which controls the usage of bias in output layer.
+	 */
 	static boolean biasEnabled = false;
 
 	/**
-	 * 
+	 * This function prints the info of our RBF network.
 	 */
 	private static void printArgs() {
 		System.out.println("+---------------------------------------+");
@@ -40,8 +65,9 @@ public class RBF {
 	}
 
 	/**
-	 * 
-	 * @param list
+	 * This function reads and initalizes the values of our RBF network.
+	 *
+	 * @param list String Arraylist all the input given in the parameters file
 	 */
 	private static void setParameters(ArrayList<String> list) {
 		CENTERS = Integer.parseInt(list.get(0));
@@ -68,9 +94,10 @@ public class RBF {
 	}
 
 	/**
-	 * 
-	 * @param line
-	 * @param error
+	 * This function updates the weight values of each center.
+	 *
+	 * @param line Dataline the input pattern we are on
+	 * @param error Double current epochs error
 	 */
 	public static void updateWeights(Dataline line, double error) {
 		for (Center center : centers)
@@ -81,9 +108,10 @@ public class RBF {
 	}
 
 	/**
-	 * 
-	 * @param line
-	 * @param error
+	 * This function updates the center position of each center.
+	 *
+	 * @param line Dataline the input pattern we are on
+	 * @param error Double current epochs error
 	 */
 	public static void updateCenters(Dataline line, double error) {
 		for (Center center : centers)
@@ -101,9 +129,10 @@ public class RBF {
 	}
 
 	/**
-	 * 
-	 * @param line
-	 * @param error
+	 * This function updates the sigma value of each center.
+	 *
+	 * @param line Dataline the input pattern we are on
+	 * @param error Double current epochs error
 	 */
 	public static void updateSigmas(Dataline line, double error) {
 		for (Center center : centers) {
@@ -121,21 +150,22 @@ public class RBF {
 	}
 
 	/**
-	 * 
-	 * @param error
+	 * This function updates the bias value of each output node.
+	 *
+	 * @param error Double current epochs error
 	 */
 	public static void updateBias(double error) {
 		bias += WEIGHT_RATE * error;
 	}
 
 	/**
+	 * This function calculates the output of our RBF network.
 	 * 
-	 * @param line
+	 * @param line Dataline the input pattern we are on
 	 */
 	public static void calculateOutputs(Dataline line) {
 
 		for (int output_node = 0; output_node < OUTPUTS; output_node++) {
-
 			outputs[output_node] = 0;
 			double sum = 0.0;
 			for (Center center : centers)
@@ -147,9 +177,10 @@ public class RBF {
 	}
 
 	/**
-	 * 
-	 * @param line
-	 * @param error
+	 * This function is used to update all of the networks variables.
+	 *
+	 * @param line Dataline the input pattern we are on
+	 * @param error Double current epochs error
 	 */
 	public static void adjustVariables(Dataline line, double error) {
 		for (Center c : centers)
@@ -162,7 +193,8 @@ public class RBF {
 	}
 
 	/**
-	 * 
+	 * This function writes the values of the weights
+	 * of a RBF network.
 	 */
 	private static void printWeights() {
 		ArrayList<String> weights = new ArrayList<>();
@@ -173,8 +205,9 @@ public class RBF {
 	}
 
 	/**
-	 * 
-	 * @param args
+	 * Projects main function - Entry Point
+	 *
+	 * @param args String parameters file name
 	 */
 	public static void main(String[] args) {
 		String parametersFile;
