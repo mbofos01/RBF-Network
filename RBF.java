@@ -18,6 +18,7 @@ public class RBF {
 	static ArrayList<Centerline> init = new ArrayList<>();
 	static ArrayList<String> errors = new ArrayList<>();
 	static double[] outputs;
+	static boolean biasEnabled = false;
 
 	/**
 	 * 
@@ -57,7 +58,7 @@ public class RBF {
 
 		Tools.fillData(TR_FILE, INPUTS, train);
 		Tools.fillData(TS_FILE, INPUTS, test);
-		Tools.fillCenters(CEN_FILE, init);
+		Tools.fillCenters(CEN_FILE,INPUTS, init);
 
 		bias = 0;
 		centers = new Center[CENTERS];
@@ -124,7 +125,7 @@ public class RBF {
 	 * @param error
 	 */
 	public static void updateBias(double error) {
-		bias += WEIGHT_RATE * error * 0;
+		bias += WEIGHT_RATE * error;
 	}
 
 	/**
@@ -156,7 +157,8 @@ public class RBF {
 		updateCenters(line, error);
 		updateSigmas(line, error);
 		updateWeights(line, error);
-		updateBias(error);
+		if (biasEnabled)
+			updateBias(error);
 	}
 
 	/**
@@ -198,9 +200,7 @@ public class RBF {
 				calculateOutputs(line);
 				double target = line.getGoal();
 				double real = outputs[0];
-				// double error = (target - real);
 				totalErrorTest += 0.5 * (target - real) * (target - real);
-				// adjustVariables(line,error);
 
 			}
 			errors.add(epoch + " " + totalError / train.size() + " " + totalErrorTest / test.size());

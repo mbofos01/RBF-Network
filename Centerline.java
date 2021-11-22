@@ -7,7 +7,13 @@ public class Centerline {
 	/**
 	 * 
 	 */
-	private double values[] = new double[53];
+	private double values[];
+
+	/**
+	*/
+	public Centerline(int numberOfInputs){
+		values = new double[numberOfInputs];
+	}
 
 	/**
 	 * 

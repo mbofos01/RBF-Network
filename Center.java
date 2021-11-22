@@ -94,14 +94,14 @@ public class Center {
 	 * This method returns the temp position
 	 * vector.
 	 *
-	 * @return Double Array temp position
+	 * @return Double Array temp position vector
 	 */
 	public double[] getTempPosition() {
 		return temp_position;
 	}
 
 	/**
-	 * 
+	 * This method prints the position of a center.
 	 */
 	public void printInfo() {
 		System.out.println();
@@ -111,7 +111,7 @@ public class Center {
 	}
 
 	/**
-	 * 
+	 * This method prints the weights of a center.
 	 */
 	public void printWeights() {
 		System.out.println();
@@ -120,32 +120,40 @@ public class Center {
 	}
 
 	/**
-	 * 
-	 * @return
+	 * This method returns the position vector
+	 * of a center.
+	 *
+	 * @return Double Array position vector
 	 */
 	public double[] getPosition() {
 		return position;
 	}
 
 	/**
-	 * 
-	 * @return
+	 * This method returns the sigma value
+	 * of a center.
+	 *
+	 * @return Double sigma value
 	 */
 	public double getSigma() {
 		return sigma;
 	}
 
 	/**
-	 * 
-	 * @param temp
+	 * This method alters the sigma value 
+	 * of a center.
+	 *
+	 * @param temp Double new sigma value
 	 */
 	public void setSigma(double temp) {
 		sigma = temp;
 	}
 
 	/**
-	 * 
-	 * @return
+	 * This method returns the weights of a center
+	 * in a String format.
+	 *
+	 * @return String weight vector 
 	 */
 	public String info() {
 		return Arrays.toString(weights);
