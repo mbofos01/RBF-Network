@@ -3,32 +3,31 @@ import java.util.Arrays;
 /**
  * This object emulates a line of the input file.
  * 
- * @author  Michail - Panagiotis Bofos
+ * @author Michail - Panagiotis Bofos
  *
  */
 public class Dataline {
 	/**
-	 * Each line of inputs in our case has the name of
-	 * our molecule, its biological action and a vector
-	 * its characteristics.
+	 * Each line of inputs in our case has the name of our molecule, its biological
+	 * action and a vector its characteristics.
 	 */
 	private double stats[];
 	private String name;
 	private double goal;
 
 	/**
-	 * Our constructor only needs the size of
-	 * the charactersitics vector.
-	 * @param size Integer size of the charactersitics vector
+	 * Our constructor only needs the size of the characteristics vector.
+	 * 
+	 * @param size Integer size of the characteristics vector
 	 */
 	public Dataline(int size) {
 		stats = new double[size];
 	}
 
 	/**
-	 * This method alters a value in the charactersitics vector.
+	 * This method alters a value in the characteristics vector.
 	 *
-	 * @param place Integer number of the charactersitic we want to change
+	 * @param place Integer number of the characteristic we want to change
 	 * @param value Double new value we want to add
 	 */
 	public void addStat(int place, double value) {
@@ -36,8 +35,9 @@ public class Dataline {
 	}
 
 	/**
-	 * This method alters a value in the charactersitics vector.
-	 * @param place Integer number of the charactersitic we want to change
+	 * This method alters a value in the characteristics vector.
+	 * 
+	 * @param place Integer number of the characteristic we want to change
 	 * @param value String new value we want to add
 	 */
 	public void addStat(int place, String value) {
@@ -45,11 +45,10 @@ public class Dataline {
 	}
 
 	/**
-	 * This method returns the characteristic value
-	 * of an input.
+	 * This method returns the characteristic value of an input.
 	 *
-	 * @param place Integer number of the charactersitic we want to get
-	 * @return Double charactersitic value
+	 * @param place Integer number of the characteristic we want to get
+	 * @return Double characteristic value
 	 */
 	public double getStat(int place) {
 		return stats[place];
@@ -74,8 +73,7 @@ public class Dataline {
 	}
 
 	/**
-	 * This method sets the biological action
-	 * wanted for a molecule.
+	 * This method sets the biological action wanted for a molecule.
 	 * 
 	 * @param value Double biological action
 	 */
@@ -84,8 +82,7 @@ public class Dataline {
 	}
 
 	/**
-	 * This method sets the biological action
-	 * wanted for a molecule.
+	 * This method sets the biological action wanted for a molecule.
 	 *
 	 * @param value String biological action
 	 */
@@ -94,8 +91,7 @@ public class Dataline {
 	}
 
 	/**
-	 * This method returns the biological 
-	 * action of a molecule.
+	 * This method returns the biological action of a molecule.
 	 *
 	 * @return Double biological action
 	 */
@@ -119,8 +115,7 @@ public class Dataline {
 	}
 
 	/**
-	 * This method returns a vector with all the 
-	 * characteristic of a molecule.
+	 * This method returns a vector with all the characteristic of a molecule.
 	 *
 	 * @return
 	 */

@@ -1,9 +1,8 @@
 import java.util.ArrayList;
 
 /**
- * This is the main class of our project. After we 
- * compile our code this is the program we must run.
- * In this file we create and run our RBF network.
+ * This is the main class of our project. After we compile our code this is the
+ * program we must run. In this file we create and run our RBF network.
  * 
  * @author Michail - Panagiotis Bofos
  *
@@ -13,9 +12,9 @@ public class RBF {
 	 * Each RBF network has a Centers vector.
 	 */
 	static Center[] centers;
-	/** 
-	 * For the algorithm of adjustable centers we need a count for the centers,
-	 * the algo's max epochs, the number of inputs and outputs.
+	/**
+	 * For the algorithm of adjustable centers we need a count for the centers, the
+	 * algo's max epochs, the number of inputs and outputs.
 	 */
 	static int CENTERS, ITERATIONS, INPUTS, OUTPUTS;
 	static double SIGMA, CENTER_RATE, SIGMA_RATE, WEIGHT_RATE, bias;
@@ -29,7 +28,7 @@ public class RBF {
 	static ArrayList<Dataline> train = new ArrayList<>();
 	static ArrayList<Dataline> test = new ArrayList<>();
 	/**
-	 * Arraylist for the inital position of our centers.
+	 * Arraylist for the initial position of our centers.
 	 */
 	static ArrayList<Centerline> init = new ArrayList<>();
 	/**
@@ -65,7 +64,7 @@ public class RBF {
 	}
 
 	/**
-	 * This function reads and initalizes the values of our RBF network.
+	 * This function reads and initializes the values of our RBF network.
 	 *
 	 * @param list String Arraylist all the input given in the parameters file
 	 */
@@ -84,7 +83,7 @@ public class RBF {
 
 		Tools.fillData(TR_FILE, INPUTS, train);
 		Tools.fillData(TS_FILE, INPUTS, test);
-		Tools.fillCenters(CEN_FILE,INPUTS, init);
+		Tools.fillCenters(CEN_FILE, INPUTS, init);
 
 		bias = 0;
 		centers = new Center[CENTERS];
@@ -96,7 +95,7 @@ public class RBF {
 	/**
 	 * This function updates the weight values of each center.
 	 *
-	 * @param line Dataline the input pattern we are on
+	 * @param line  Dataline the input pattern we are on
 	 * @param error Double current epochs error
 	 */
 	public static void updateWeights(Dataline line, double error) {
@@ -110,7 +109,7 @@ public class RBF {
 	/**
 	 * This function updates the center position of each center.
 	 *
-	 * @param line Dataline the input pattern we are on
+	 * @param line  Dataline the input pattern we are on
 	 * @param error Double current epochs error
 	 */
 	public static void updateCenters(Dataline line, double error) {
@@ -131,7 +130,7 @@ public class RBF {
 	/**
 	 * This function updates the sigma value of each center.
 	 *
-	 * @param line Dataline the input pattern we are on
+	 * @param line  Dataline the input pattern we are on
 	 * @param error Double current epochs error
 	 */
 	public static void updateSigmas(Dataline line, double error) {
@@ -179,7 +178,7 @@ public class RBF {
 	/**
 	 * This function is used to update all of the networks variables.
 	 *
-	 * @param line Dataline the input pattern we are on
+	 * @param line  Dataline the input pattern we are on
 	 * @param error Double current epochs error
 	 */
 	public static void adjustVariables(Dataline line, double error) {
@@ -193,8 +192,7 @@ public class RBF {
 	}
 
 	/**
-	 * This function writes the values of the weights
-	 * of a RBF network.
+	 * This function writes the values of the weights of a RBF network.
 	 */
 	private static void printWeights() {
 		ArrayList<String> weights = new ArrayList<>();

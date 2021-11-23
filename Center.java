@@ -1,8 +1,8 @@
 import java.util.Arrays;
 
 /**
- * This object emulates the usage of a center in a 
- * Radial Basis Function network.
+ * This object emulates the usage of a center in a Radial Basis Function
+ * network.
  *
  * @author Michail - Panagiotis Bofos
  *
@@ -10,11 +10,9 @@ import java.util.Arrays;
 
 public class Center {
 	/**
-	 * Every center has a weight and a position vector
-	 * a sigma value for the gaussian and the number
-	 * of the output units we use in our network. 
-	 * We also add temp vectors for the weights and 
-	 * position and a temp value for sigma
+	 * Every center has a weight and a position vector a sigma value for the
+	 * gaussian and the number of the output units we use in our network. We also
+	 * add temp vectors for the weights and position and a temp value for sigma
 	 * because the update of them depend on each other.
 	 */
 	public double[] weights, temp_weights;
@@ -23,13 +21,12 @@ public class Center {
 	public double sigma, temp_sigma;
 
 	/**
-	 * This constructor requests the dimension of our input
-	 * and of our output, the initial sigma value and 
-	 * the first position of each center.
+	 * This constructor requests the dimension of our input and of our output, the
+	 * initial sigma value and the first position of each center.
 	 *
-	 * @param sigma Double sigma value
-	 * @param numOfOutputs Integer number of outputs
-	 * @param numOfInputs Integer number of inputs
+	 * @param sigma         Double sigma value
+	 * @param numOfOutputs  Integer number of outputs
+	 * @param numOfInputs   Integer number of inputs
 	 * @param firstPosition Double Array initial position vector
 	 */
 	public Center(double sigma, int numOfOutputs, int numOfInputs, double[] firstPosition) {
@@ -39,14 +36,14 @@ public class Center {
 			weights[i] = Tools.generateRandom();
 		position = new double[numOfInputs];
 		temp_position = new double[numOfInputs];
-		for (int i = 0; i < numOfInputs; i++) 
+		for (int i = 0; i < numOfInputs; i++)
 			position[i] = firstPosition[i];
 		this.sigma = sigma;
 	}
 
 	/**
-	 * This method returns the weight that connects
-	 * our center and a output unit (the output_node)th.
+	 * This method returns the weight that connects our center and a output unit
+	 * (the output_node)th.
 	 *
 	 * @param output_node Integer the ID of the output we want
 	 * @return Double coefficient
@@ -56,19 +53,18 @@ public class Center {
 	}
 
 	/**
-	 * This method returns the temp weight that connects
-	 * our center and a output unit (the output_node)th.
+	 * This method returns the temp weight that connects our center and a output
+	 * unit (the output_node)th.
 	 *
 	 * @param output_node Integer the ID of the output we want
-	 * @return  Double temp coefficient
+	 * @return Double temp coefficient
 	 */
 	public double getTempWeight(int output_node) {
 		return temp_weights[output_node];
 	}
 
 	/**
-	 * This method copies the real values
-	 * of the sigma and the weights/position
+	 * This method copies the real values of the sigma and the weights/position
 	 * vectors int the temp variables.
 	 */
 	public void enableTempVariables() {
@@ -81,8 +77,7 @@ public class Center {
 	}
 
 	/**
-	 * This method returns the temp value of 
-	 * our sigma variable.
+	 * This method returns the temp value of our sigma variable.
 	 *
 	 * @return Double temp sigma
 	 */
@@ -91,8 +86,7 @@ public class Center {
 	}
 
 	/**
-	 * This method returns the temp position
-	 * vector.
+	 * This method returns the temp position vector.
 	 *
 	 * @return Double Array temp position vector
 	 */
@@ -120,8 +114,7 @@ public class Center {
 	}
 
 	/**
-	 * This method returns the position vector
-	 * of a center.
+	 * This method returns the position vector of a center.
 	 *
 	 * @return Double Array position vector
 	 */
@@ -130,8 +123,7 @@ public class Center {
 	}
 
 	/**
-	 * This method returns the sigma value
-	 * of a center.
+	 * This method returns the sigma value of a center.
 	 *
 	 * @return Double sigma value
 	 */
@@ -140,8 +132,7 @@ public class Center {
 	}
 
 	/**
-	 * This method alters the sigma value 
-	 * of a center.
+	 * This method alters the sigma value of a center.
 	 *
 	 * @param temp Double new sigma value
 	 */
@@ -150,10 +141,9 @@ public class Center {
 	}
 
 	/**
-	 * This method returns the weights of a center
-	 * in a String format.
+	 * This method returns the weights of a center in a String format.
 	 *
-	 * @return String weight vector 
+	 * @return String weight vector
 	 */
 	public String info() {
 		return Arrays.toString(weights);
