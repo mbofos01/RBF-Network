@@ -1,6 +1,6 @@
 Project: Radial Basis Function Network
 
-Author: Michail-Panagiotis Bofos AO082689
+Author: Michail-Panagiotis Bofos 
 
 Note: runRBF.sh script installs the matplot lib.
 
